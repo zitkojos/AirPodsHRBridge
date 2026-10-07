@@ -1,0 +1,44 @@
+name: Build iOS App
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Install XcodeGen
+      run: brew install xcodegen
+
+    - name: Generate Xcode Project
+      run: xcodegen generate
+
+    - name: Build App
+      run: |
+        xcodebuild build \
+          -project AirPodsHRBridge.xcodeproj \
+          -scheme AirPodsHRBridge \
+          -sdk iphoneos \
+          -configuration Release \
+          -derivedDataPath build \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
+
+    - name: Package IPA
+      run: |
+        mkdir -p Payload
+        cp -r build/Build/Products/Release-iphoneos/AirPodsHRBridge.app Payload/
+        zip -r AirPodsHRBridge.ipa Payload
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AirPodsHRBridge-IPA
+        path: AirPodsHRBridge.ipa
