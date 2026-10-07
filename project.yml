@@ -1,26 +1,15 @@
 name: AirPodsHRBridge
-options:
-  bundleIdPrefix: com.aplikace
-  deploymentTarget:
-    iOS: "16.0"
 targets:
   AirPodsHRBridge:
     type: application
     platform: iOS
+    deploymentTarget: "16.0"
     sources:
-      - path: AirPodsHRBridge
+      - AirPodsHRBridge
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.aplikace.AirPodsHRBridge
+        INFOPLIST_FILE: AirPodsHRBridge/Info.plist
         CODE_SIGNING_ALLOWED: "NO"
         CODE_SIGNING_REQUIRED: "NO"
         CODE_SIGN_IDENTITY: ""
-    info:
-      path: AirPodsHRBridge/Info.plist
-      properties:
-        NSHealthShareUsageDescription: "Čtení tepové frekvence z AirPods."
-        NSBluetoothAlwaysUsageDescription: "Vysílání tepové frekvence přes Bluetooth."
-        UIBackgroundModes:
-          - bluetooth-central
-          - bluetooth-peripheral
-          - processing
