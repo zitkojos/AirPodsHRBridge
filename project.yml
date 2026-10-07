@@ -10,11 +10,8 @@ targets:
     sources:
       - AirPodsHRBridge
     settings:
-      base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.aplikace.AirPodsHRBridge
-        CODE_SIGNING_REQUIRED: "NO"
-        CODE_SIGNING_ALLOWED: "NO"
-        CODE_SIGN_IDENTITY: ""
+      PRODUCT_BUNDLE_IDENTIFIER: com.aplikace.AirPodsHRBridge
+      GENERATE_INFOPLIST_FILE: YES
     info:
       properties:
         NSHealthShareUsageDescription: "Čtení tepové frekvence z AirPods."
